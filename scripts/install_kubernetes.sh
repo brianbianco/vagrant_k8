@@ -2,15 +2,14 @@
 
 apt-get install bridge-utils
 
-K8_V=v1.1.4
+K8_V=v1.1.7
 
-wget https://github.com/kubernetes/kubernetes/releases/download/$K8_V/kubernetes.tar.gz
+wget -nv https://github.com/kubernetes/kubernetes/releases/download/$K8_V/kubernetes.tar.gz
 tar zxvf kubernetes.tar.gz
 cd kubernetes/server
 tar zxvf kubernetes-server-linux-amd64.tar.gz
-cp kubernetes/server/bin/kubelet /usr/local/bin/
-cp kubernetes/server/bin/kube-proxy /usr/local/bin/
 cp kubernetes/server/bin/hyperkube /usr/local/bin/
+cp kubernetes/server/bin/kubectl /usr/local/bin/
 
 ETCD_V=$(cat ../cluster/images/etcd/Makefile | grep 'ETCD_VERSION =' | cut -f3 -d' ')
 
