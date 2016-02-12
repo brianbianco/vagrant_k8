@@ -13,6 +13,8 @@ Vagrant.configure("2") do |config|
     c.vm.provision :shell, :path => File.join(scripts_dir, "etcd.sh")
     c.vm.provision :shell, :path => File.join(scripts_dir, "install_flanneld.sh"), :args => "controller"
     c.vm.provision :shell, :path => File.join(scripts_dir, "docker_flannel_setup.sh"), :args => "controller"
+    c.vm.provision :shell, :path => File.join(scripts_dir, "kube_services.sh"), :args => "controller"
+    c.vm.provision :file, source: "./kube_examples/", destination: "./kube_examples/"
   end
 
   (2..4).each do |n|
@@ -27,6 +29,7 @@ Vagrant.configure("2") do |config|
       c.vm.provision :shell, :path => File.join(scripts_dir, "install_kubernetes.sh")
       c.vm.provision :shell, :path => File.join(scripts_dir, "install_flanneld.sh")
       c.vm.provision :shell, :path => File.join(scripts_dir, "docker_flannel_setup.sh")
+      c.vm.provision :shell, :path => File.join(scripts_dir, "kube_services.sh")
     end
   end
 end
